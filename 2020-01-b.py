@@ -8,7 +8,7 @@ y = 2020
 
 data01a = get_data(day=d, year=y)
 
-with open('01a.txt','w') as f:
+with open('2020-01.txt','w') as f:
     f.write(data01a)
 
 data01a_list = [int(i) for i in data01a.split(sep="\n")]
