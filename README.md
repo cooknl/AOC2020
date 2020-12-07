@@ -52,7 +52,18 @@
   ```
 
   - So, I will now be using
-  
+
   ```Python
-    import os; os.environ["AOCD_DIR"]
+    import os
+    os.environ["AOCD_DIR"]
+    os.environ["AOC_SESSION"]
   ```
+
+  - [ ] TODO: refactor previous days' code and deprecating the use of `aocd_setup`
+- Confirmed that `from aocd import data` saves input data to a file `yyyy_dd_input.txt`
+  in the directory `$ENV:AOCD_DIR/$ENV:AOC_SESSION` while making data available to
+  the current program as `data`.
+- SO MUCH RECURSION
+  - SO MUCH RECURSION
+    - SO MUCH RECURSION
+      - SO...
