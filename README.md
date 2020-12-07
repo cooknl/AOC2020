@@ -44,6 +44,15 @@
 ## Day 07 (Python)
 
 - Created `AOCD_DIR` and `AOC_SESSION` environment variable using Powershell, per the [`advent-of-code-data` README](https://github.com/wimglenn/advent-of-code-data/blob/master/README.rst), as I'm on a Win10 machine
-    - Per [the PowerShell docs](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.1) the PowerShell 
-    script for this is ```PowerShell $Env:<variable-name> = "<new-value>" ```
-    - So, I will now be using ```Python import os; os.environ["AOCD_DIR"]```
+  - Per [the PowerShell docs](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.1) the PowerShell
+  script for this is
+
+  ```PowerShell
+    $Env:<variable-name> = "<new-value>"
+  ```
+
+  - So, I will now be using
+  
+  ```Python
+    import os; os.environ["AOCD_DIR"]
+  ```
