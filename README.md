@@ -67,3 +67,7 @@
   - SO MUCH RECURSION
     - SO MUCH RECURSION
       - SO...
+- Remembering `defaultdict` is useful when you don't want to have keyerrors,
+  though maybe it's not strictly necessary here?
+- [**MAJOR CONCEPTUAL BREAKTHROUGH**](https://twitter.com/nathangs20/status/1335953455152820230?s=20)
+  with [pytest](https://docs.pytest.org/en/stable/)
