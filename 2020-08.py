@@ -25,36 +25,44 @@ def create_code_tuple(data):
                 ) for l in data.split("\n")
             )
 
-def nop(state):
-    state["line"] += 1
-    return state
+def op(state, instruction):
+    if instruction[0] == 'nop':
+        state["line"] += 1
+        return state
+    elif instruction[0] == 'acc':
+        state["acc"] += instruction[1]
+        state["line"] += 1
+        return state
+    elif instruction[0] == "jmp":
+        state["line"] += instruction[1]
+        return state
 
 def print_state(state):
-    print("acc =", state["acc"], "; line =", state["line"])
+    print("acc =", state["acc"], 
+          "\nline =", state["line"],
+          "\nhistory = ", state["history"])
 
-def increment(lines, state):
-    lines.append(state["line"])
-    return lines
+def increment_history(state):
+    state["history"].append(state["line"])
+    return state
 
-def stop(lines, state):
-    if state["lines"] in lines:
-        return "stop"
-    else:
-        return None
+def keep_going(state):
+    return state["line"] not in state["history"]
 
 def run_boot(code_tuple):
-    line_history = [0]
-    state = {"acc": 0, "line": 0}
-    print_state(state)
-    print(line_history)
-    state = nop(state)
-    print(check_stop)
-    line_history = increment(line_history, state)
-    print_state(state)
-    print(line_history)
-
-
+    state = {"acc": 0, "line": 0, "history": []}
+    while keep_going(state):
+        print("in the loop")
+        print_state(state)
+        state = increment_history(state)
+        print_state(state)
+        state = op(state, code_tuple[state["line"]])
+        print_state(state)
+    else:
+        return state
 
 def answer_a(input_data=data):
-    run_boot(create_code_tuple(input_data))
-    return 0
+    end_state = run_boot(create_code_tuple(input_data))
+    return end_state["acc"]
+
+submit(answer_a(data), part='a')
