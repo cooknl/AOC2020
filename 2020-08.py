@@ -25,9 +25,34 @@ def create_code_tuple(data):
                 ) for l in data.split("\n")
             )
 
+def nop(state):
+    state["line"] += 1
+    return state
+
+def print_state(state):
+    print("acc =", state["acc"], "; line =", state["line"])
+
+def increment(lines, state):
+    lines.append(state["line"])
+    return lines
+
+def stop(lines, state):
+    if state["lines"] in lines:
+        return "stop"
+    else:
+        return None
+
 def run_boot(code_tuple):
-    acc = 0
-    line = 0
+    line_history = [0]
+    state = {"acc": 0, "line": 0}
+    print_state(state)
+    print(line_history)
+    state = nop(state)
+    print(check_stop)
+    line_history = increment(line_history, state)
+    print_state(state)
+    print(line_history)
+
 
 
 def answer_a(input_data=data):
