@@ -1,6 +1,20 @@
 from aocd import get_data, submit
 from os.path import isfile
 
+def get_test_data(part,fname=__file__):
+
+    with open(fname[:-3] + "-test-data-" + part + ".txt","r") as f:
+        test_data = f.read()
+
+    return test_data
+
+def get_test_answer(part,fname=__file__):
+
+    with open(fname[:-3] + "-test-answer-" + part + ".txt", "r") as f:
+        test_answer = f.read()
+
+    return int(test_answer)
+
 def setup_info(file_name):
 
     fname = file_name[:-3].split(sep="-")
