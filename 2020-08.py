@@ -26,6 +26,7 @@ def test_find_ops():
     test_data_a = create_code_tuple(get_test_data(part='a', fname=__file__))
     assert find_ops(test_data_a, 'nop') == [0]
     assert find_ops(test_data_a, 'jmp') == [2,4,7]
+    assert find_ops(test_data_a, ['nop','jmp']) == [0,2,4,7]
 
 def test_insert():
     test_data_a = create_code_tuple(get_test_data(part='a', fname=__file__))
@@ -51,10 +52,10 @@ def flip_operation(instruction):
     else:
         return instruction
 
-def find_ops(instructions, operation):
+def find_ops(instructions, operations):
     ops_list = []
     for line, instruction in enumerate(instructions):
-        if instruction[0] == operation:
+        if instruction[0] in operations:
             ops_list.append(line)
     return ops_list
 
@@ -106,19 +107,13 @@ def answer_a(input_data=data):
 
 def answer_b(input_data=data):
     instructions = create_code_tuple(input_data)
-    nops_list = find_ops(instructions, 'nop')
-    for nop_line in nops_list:
-        trial_nop_tuple = insert_flipped_instruction(instructions, nop_line)
-        end_state = run_boot(trial_nop_tuple)
-        if end_state["condition"] == "success":
-            return end_state["acc"]
-    jmps_list = find_ops(instructions, 'jmp')
-    for jmp_line in jmps_list:
-        trial_jmp_tuple = insert_flipped_instruction(instructions, jmp_line)
-        end_state = run_boot(trial_jmp_tuple)
+    ops_list = find_ops(instructions, ['nop','jmp'])
+    for op_line in ops_list:
+        trial_op_tuple = insert_flipped_instruction(instructions, op_line)
+        end_state = run_boot(trial_op_tuple)
         if end_state["condition"] == "success":
             return end_state["acc"]
     return 0
 
 # submit(answer_a(data), part='a')
-submit(answer_b(data), part='b')
+# submit(answer_b(data), part='b')
