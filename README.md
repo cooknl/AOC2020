@@ -76,3 +76,10 @@
 
 - A ton of helper functions and keeping track of state with a dictionary
 - Brute force exercise for part b
+
+## Day 09 (Python)
+
+- More brute force, again
+- `itertools.combinations()` to the rescue, again
+- Some hard thinking about the verbiage of part b. Took several tries to read and understand what the problem was asking for
+- JUST BECAUSE A TEST PASSES DOESN'T MEAN YOU'RE CODE IS CORRECT. Could be a "false positive" in the "test" set
