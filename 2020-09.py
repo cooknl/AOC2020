@@ -12,6 +12,12 @@ def test_a():
 def test_actual_a():
     assert answer_a(data, 25) == 88311122
 
+def test_b():
+    assert answer_b(
+                    input_data=get_test_data(part='a', fname=__file__),
+                    preamble=5
+    ) == get_test_answer(part='b', fname=__file__)
+
 def generate_data_iterator(data_string):
     return tuple(int(d) for d in data_string.split('\n'))
 
@@ -25,4 +31,13 @@ def answer_a(input_data=data, preamble=5):
             return d
     return 0
 
+def answer_b(input_data=data, preamble=5):
+    data_iter = generate_data_iterator(input_data)
+    for line, d in enumerate(data_iter[preamble:]):
+        for start, end in combinations(range(0,preamble),2):
+            if d == sum(data_iter[line + start: line + end + 1]):
+                return data_iter[line + start] + data_iter[line + end + 1]
+    return 0
+
 submit(answer_a(data, 25), part='a')
+submit(answer_b(data, 25), part='b')
