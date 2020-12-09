@@ -71,3 +71,8 @@
   though maybe it's not strictly necessary here?
 - [**MAJOR CONCEPTUAL BREAKTHROUGH**](https://twitter.com/nathangs20/status/1335953455152820230?s=20)
   with [pytest](https://docs.pytest.org/en/stable/)
+
+## Day 08 (Python)
+
+- A ton of helper functions and keeping track of state with a dictionary
+- Brute force exercise for part b
