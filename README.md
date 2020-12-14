@@ -83,3 +83,20 @@
 - `itertools.combinations()` to the rescue, again
 - Some hard thinking about the verbiage of part b. Took several tries to read and understand what the problem was asking for
 - JUST BECAUSE A TEST PASSES DOESN'T MEAN YOU'RE CODE IS CORRECT. Could be a "false positive" in the "test" set
+
+## Day 10 (Python)
+
+- Using the `zip` trick from [Day 05](#day-05), part a was just a matter of counting 1's and 3's from the `diff` of itself
+- Part b took a while to ferret out the pattern, which ended up being the ["Tribonacci" sequence](https://mathworld.wolfram.com/TribonacciNumber.html) which I used a recursive function to calculate for each set of 1's
+
+  ```Python
+  def calc_series(n):
+    if n == 0:
+        return 1
+    elif n == 1:
+        return 1
+    elif n == 2:
+        return 2
+    else:
+        return calc_series(n-1) + calc_series(n-2) + calc_series(n-3)
+  ```
