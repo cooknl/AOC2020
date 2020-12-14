@@ -1,6 +1,7 @@
 from aocd import data, submit
 from aocd_setup import get_test_data, get_test_answer
 import math
+from functools import lru_cache
 
 def test_calc_series():
     assert calc_series(0) == 1
@@ -29,6 +30,7 @@ def test_answer():
 def generate_data_iterator(data_string):
     return list(int(d) for d in data_string.split('\n'))
 
+@lru_cache
 def calc_series(n):
     if n == 0:
         return 1
