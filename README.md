@@ -100,3 +100,15 @@
     else:
         return calc_series(n-1) + calc_series(n-2) + calc_series(n-3)
   ```
+
+## Day 11 (Python)
+
+- Converted characters to numeric to make selections easier
+  - `L` -> 0, empty seat
+  - `#` -> 1, occupied seat
+  - `.` -> -1, floor
+- Padded the grid with `-1` floor to assist in neighborhood finding
+- Used `numpy` to handle the seating grid and help with indexing and filtering
+  - `np.where()`
+- Used `itertools.product()` to generate cardinal directions for part b
+- Part b marched out along each cardinal direction until hitting a boundary or a seat
