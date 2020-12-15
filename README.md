@@ -112,3 +112,13 @@
   - `np.where()`
 - Used `itertools.product()` to generate cardinal directions for part b
 - Part b marched out along each cardinal direction until hitting a boundary or a seat
+
+## Day 12 (Python)
+
+- Dictionaries for state again, like [Day 08](#day-08)
+- Another idea would have been to use complex numbers!
+
+## Day 13 (Python)
+
+- Had a hunch that modulus, `%`, would be helpful, but took a bit of investigation to figure out how
+- `min()` takes a `key` keyword argument that lets you select an element based on the result of a `lambda`
