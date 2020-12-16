@@ -126,3 +126,10 @@
   and even my attempt as subtly still had the counter increases by 1, instead of the
   bus ID
 - https://joepitts.co.uk/blog/advent-of-code-day-13.html was the spoiler I needed
+
+## Day 14 (Python)
+
+- Setting and unsetting bits according to a mask
+- The real data doesn't match the test data (multiple masks) 😭
+- TDD is saving my bacon, allowing for rapid iterations for small changes
+- Using `f-strings` and `itertools.product()` means legible code!
