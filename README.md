@@ -122,3 +122,7 @@
 
 - Had a hunch that modulus, `%`, would be helpful, but took a bit of investigation to figure out how
 - `min()` takes a `key` keyword argument that lets you select an element based on the result of a `lambda`
+- Part b was just...wow. All my brute force was hopeless against the large numbers
+  and even my attempt as subtly still had the counter increases by 1, instead of the
+  bus ID
+- https://joepitts.co.uk/blog/advent-of-code-day-13.html was the spoiler I needed
