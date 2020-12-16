@@ -1,11 +1,11 @@
 from aocd import data, submit
-from aocd_setup import get_test_data, get_test_answer
 import numpy as np
+import timeit
 
 # https://adventofcode.com/2020/day/15
 
-# def test_answer_a():
-#     # assert answer_a('0,3,6', 2020) == 436
+def test_answer_a():
+    assert answer_a('0,3,6', 2020) == 436
 #     # assert answer_a('1,3,2', 2020) == 1
 #     # assert answer_a('2,1,3', 2020) == 10
 #     # assert answer_a('1,2,3', 2020) == 27
@@ -14,7 +14,8 @@ import numpy as np
 #     # assert answer_a('3,1,2', 2020) == 1836
 #     assert answer_a(data, 2020) == 475
 
-# def test_answer_b():
+def test_answer_b():
+    assert answer_b('0,3,6', 2020) == 436
     # assert answer_b(data, 2020) == 475
     # assert answer_b('0,3,6', 30000000) == 175594
     # assert answer_b('1,3,2', 30000000) == 2578
@@ -23,7 +24,7 @@ import numpy as np
     # assert answer_b('2,3,1', 30000000) == 6895259
     # assert answer_b('3,2,1', 30000000) == 18
     # assert answer_b('3,1,2', 30000000) == 362
-    # assert answer_b(data, 30000000) == 0
+    # assert answer_b(data, 30000000) == 11261
 
 
 # https://numpy.org/doc/stable/reference/generated/numpy.fromstring.html
@@ -44,33 +45,51 @@ def answer_a(input_data, epoch):
     return sequence[-1]
 
 def generate_input_b(input_data):
-    split_chars = input_data.split(',')
-    zero_filter = list(filter(lambda x: x[1] == '0', enumerate(input_data.split(','))))
-    if zero_filter:
-        last_zero = max(zero_filter, key = lambda z: z[0])[0]
-    else:
-        last_zero = None
-    return (len(split_chars), {k: int(v) for k, v in enumerate(input_data.split(',')) if v != '0'},last_zero)
+    # Try keeping the VALUES as keys and the indices as values, including 0
+    num_dict = {}
+    for i, n in enumerate(input_data.split(',')):
+        if int(n) in num_dict.keys():
+            num_dict[int(n)] = (num_dict[int(n)][1], i)
+        else:
+            num_dict[int(n)] = (None, i)
+        length = i
+        prev_num = int(n)
+    return num_dict, length, prev_num
 
 def answer_b(input_data, epoch):
-    ans = 0
-    length, sparse_sequence, zero = generate_input_b(input_data)
-    zero_index = (zero, None)
-    for i in range(length,epoch):
-        if (i-1) in sparse_sequence.keys(): # The previous value was non-zero
-            matches = dict(filter(lambda elem: elem[1] == sparse_sequence[i-1], 
-                                  sparse_sequence.items()))
-            if len(matches) == 1: # If it only exists once in the sparse seq, then update zero_index
-                zero_index = (i, zero_index[0])
+    num_d, length, prev_num = generate_input_b(input_data)
+    for i in range(length+1,epoch):
+        # If there's a None in the previous number's index tuple, then it was
+        # the first instance and the index for the ZERO will be updated with
+        # the current index
+        if None in num_d[prev_num]:  
+            prev_num = 0
+            num_d[prev_num] = (num_d[prev_num][1], i)
+        # If not a None, then it's got 2 indices to subtract to calculate the turns
+        else:
+            turns = num_d[prev_num][1] - num_d[prev_num][0]
+            if turns in num_d:
+                num_d[turns] = (num_d[turns][1], i)
             else:
-                sorted_keys = sorted(list(matches.keys()))
-                sparse_sequence[i] = sorted_keys[-1] - sorted_keys[-2]
-                sparse_sequence.pop(sorted_keys[-2])
-        else: # The previous value was zero, so take the difference in zero_index as new value
-            sparse_sequence[i] = zero_index[0] - zero_index[1]
-    if max(sparse_sequence.keys()) == epoch-1: # If the final value is non-zero return it
-        ans = sparse_sequence[epoch-1]
-    return ans
+                num_d[turns] = (None, i)
+            prev_num = turns
+    return prev_num
 
-# submit(answer_a(data,2020),part='a')
-submit(answer_b(data,30000000),part='b')
+if __name__ == '__main__':
+    # submit(answer_a(data,2020),part='a')
+    # submit(answer_b(data,30000000),part='b')
+
+    timer_number = 100
+    print("Numpy")
+    numpy_time = timeit.timeit('answer_a("6,4,12,1,20,0,16",2020)', 
+                        setup='from __main__ import answer_a',
+                        number=timer_number)
+    print("Avg seconds:" + f"{(numpy_time/timer_number)*1000:0.1f} ms")
+    print("---")
+    print("Dictionary")
+    dict_time = timeit.timeit('answer_b("6,4,12,1,20,0,16",2020)', 
+                        setup='from __main__ import answer_b',
+                        number=timer_number)
+    print("Avg seconds:" + f"{(dict_time/timer_number)*1000:0.1f} ms")
+    print("---")
+    print("Speed multiple:" + f"{(abs(numpy_time - dict_time)/min(numpy_time,dict_time)):0.1f}")

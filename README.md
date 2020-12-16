@@ -125,7 +125,7 @@
 - Part b was just...wow. All my brute force was hopeless against the large numbers
   and even my attempt as subtly still had the counter increases by 1, instead of the
   bus ID
-- https://joepitts.co.uk/blog/advent-of-code-day-13.html was the spoiler I needed
+- <https://joepitts.co.uk/blog/advent-of-code-day-13.html> was the spoiler I needed
 
 ## Day 14 (Python)
 
@@ -137,3 +137,8 @@
 ## Day 15 (Python)
 
 - `enumerate()` is an iterator. Once the iterator object is done, there's no resetting it
+- Part a used `numpy` to pre-allocate memory and do the indexing and searching
+- Part b not friendly...had to do some real thinking about what information was actually necessary...namely the "spoken numbers" and the 2 most recent "turns" of the spoken number. How to encode the first time?
+- Final performant implementation ended up with a dictionary that uses the spoken numbers as the **keys** and the **value** only keeps the most recent 2 turns in a tuple, with `None` in the first element as the indication that the number had only been spoken once.
+- Searching dictionary keys is super fast, so finding whether a number had been spoken was sped up by a factor of about 13!
+- It also has the benefit of not pre-allocating 30M array elements
