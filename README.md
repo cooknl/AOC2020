@@ -133,3 +133,7 @@
 - The real data doesn't match the test data (multiple masks) 😭
 - TDD is saving my bacon, allowing for rapid iterations for small changes
 - Using `f-strings` and `itertools.product()` means legible code!
+
+## Day 15 (Python)
+
+- `enumerate()` is an iterator. Once the iterator object is done, there's no resetting it

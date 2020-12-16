@@ -5,11 +5,11 @@ from itertools import product
 
 # https://adventofcode.com/2020/day/14
 
-# def test_apply_value_mask():
-#     mask = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X'
-#     assert apply_value_mask(mask, 11) == 73
-#     assert apply_value_mask(mask, 101) == 101
-#     assert apply_value_mask(mask, 0) == 64
+def test_apply_value_mask():
+    mask = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X'
+    assert apply_value_mask(mask, 11) == 73
+    assert apply_value_mask(mask, 101) == 101
+    assert apply_value_mask(mask, 0) == 64
 
 def test_apply_address_mask():
     assert apply_address_mask('000000000000000000000000000000X1001X',42) == [26, 27, 58, 59]
