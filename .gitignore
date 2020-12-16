@@ -2,3 +2,4 @@ aoc-secrets/
 __pycache__/
 debug.log
 *checkpoint.ipynb
+.vscode/
