@@ -1,6 +1,10 @@
 from aocd import data, submit
 import numpy as np
 import timeit
+import pandas as pd
+import matplotlib.pyplot as plt
+from pathlib import Path
+
 
 # https://adventofcode.com/2020/day/15
 
@@ -76,20 +80,58 @@ def answer_b(input_data, epoch):
     return prev_num
 
 if __name__ == '__main__':
+    path=Path()
     # submit(answer_a(data,2020),part='a')
     # submit(answer_b(data,30000000),part='b')
 
-    timer_number = 100
-    print("Numpy")
-    numpy_time = timeit.timeit('answer_a("6,4,12,1,20,0,16",2020)', 
-                        setup='from __main__ import answer_a',
-                        number=timer_number)
-    print("Avg seconds:" + f"{(numpy_time/timer_number)*1000:0.1f} ms")
-    print("---")
-    print("Dictionary")
-    dict_time = timeit.timeit('answer_b("6,4,12,1,20,0,16",2020)', 
-                        setup='from __main__ import answer_b',
-                        number=timer_number)
-    print("Avg seconds:" + f"{(dict_time/timer_number)*1000:0.1f} ms")
-    print("---")
-    print("Speed multiple:" + f"{(abs(numpy_time - dict_time)/min(numpy_time,dict_time)):0.1f}")
+    fname = 'numpy_v_dict.md'
+    if path.glob(fname):
+        df = pd.read_table(fname, sep="|", 
+                                  header=0, 
+                                  index_col=1, 
+                                  skipinitialspace=True).dropna(axis=1, 
+                                                                how='all').iloc[1:].astype(float)
+            # Read a markdown file, getting the header from the first row and index from the second column
+            # Drop the left-most and right-most null columns 
+            # Drop the header underline row
+        df.columns = [c.strip() for c in df.columns]
+
+
+    else:
+        timer_number = 10
+        epochs = [10, 100, 1000, 10000, 100000]
+        numpy_times = []
+        dict_times = []
+        multipliers = []
+        print(f"Number of times to run for each epoch: {timer_number}")
+        print(f"Epochs: {epochs}")
+        for epoch in epochs:
+            print(f"---EPOCH: {epoch}---")
+            print("Numpy")
+            total_numpy_time = timeit.timeit(f'answer_a("6,4,12,1,20,0,16",{epoch})', 
+                                setup='from __main__ import answer_a',
+                                number=timer_number)
+            avg_numpy_time = (total_numpy_time/timer_number)*1000
+            numpy_times.append(avg_numpy_time)
+            print(f"Avg seconds: {avg_numpy_time:0.1f} ms")
+            print("---")
+            print("Dictionary")
+            total_dict_time = timeit.timeit(f'answer_b("6,4,12,1,20,0,16",{epoch})', 
+                                setup='from __main__ import answer_b',
+                                number=timer_number)
+            avg_dict_time = (total_dict_time/timer_number)*1000
+            dict_times.append(avg_dict_time)
+            print(f"Avg seconds: {avg_dict_time:0.1f} ms")
+            print("---")
+            multiplier = (abs(avg_numpy_time - avg_dict_time)/min(avg_numpy_time,avg_dict_time))
+            multipliers.append(multiplier)
+            print(f"Speed multiple: {multiplier:0.1f}")
+
+        df = pd.DataFrame({'Numpy': numpy_times,
+                            'Dict': dict_times,
+                            'Multiplier': multipliers},
+                        index=epochs) 
+        print(df.to_markdown())
+
+    fig = df[['Numpy','Dict']].plot.line(loglog=True).get_figure()
+    fig.savefig('numpy_v_dict.png')

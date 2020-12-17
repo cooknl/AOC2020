@@ -142,3 +142,15 @@
 - Final performant implementation ended up with a dictionary that uses the spoken numbers as the **keys** and the **value** only keeps the most recent 2 turns in a tuple, with `None` in the first element as the indication that the number had only been spoken once.
 - Searching dictionary keys is super fast, so finding whether a number had been spoken was sped up by a factor of about 13!
 - It also has the benefit of not pre-allocating 30M array elements
+
+Speedup results
+
+|  Epoch | Numpy (ms) | Dict (ms)|   Multiplier |
+|-------:|-----------:|---------:|-------------:|
+|     10 |    0.06445 |  0.02044 |      2.15313 |
+|    100 |    1.1225  |  0.10579 |      9.61064 |
+|   1000 |   11.278   |  0.90012 |     11.5295  |
+|  10000 |  259.385   | 10.4211  |     23.8902  |
+| 100000 | 8677.73    | 96.2351  |     89.1722  |
+
+![](.\15\numpy_v_dict.png)
