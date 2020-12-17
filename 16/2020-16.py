@@ -6,17 +6,23 @@ import re
 
 def test_answer():
     assert answer(Path('2020-16-test-data-a.txt').read_text()) == 71
+    assert answer(data) == 25961
+
+# https://realpython.com/python-sets/
 
 def generate_input(input_data):
-    chunks = re.split(r'\n\nyour ticket:\n|\n\nnearby tickets:\n', input_data)
-    included = set()
-    for line in chunks[0].split('\n'):
-        print(*re.findall(r'(\d+)-(\d+)', line))
-    return 0
+    return re.split(r'\n\nyour ticket:\n|\n\nnearby tickets:\n', input_data)
 
 def answer(input_data=data):
-    print(generate_input(input_data))
-    return 0
+    chunks = generate_input(input_data)
+    included = set()
+    for line in chunks[0].split('\n'):
+        for t in re.findall(r'(\d+)-(\d+)', line):
+            t = [int(c) for c in t]
+            included.update( list(range(t[0], t[1]+1)))
+    nearby = [int(c) for c in re.split('\n|,',chunks[2])]
+    not_included = [n for n in nearby if n not in included]
+    return sum(not_included)
 
 if __name__ == "__main__":
-    answer(data)
+    submit(answer(data), part='a')

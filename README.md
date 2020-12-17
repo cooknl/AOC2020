@@ -154,3 +154,7 @@ Speedup results
 | 100000 | 8677.73    | 96.2351  |     89.1722  |
 
 ![](./15/numpy_v_dict.png)
+
+## Day 16 (Python)
+
+- First attempt passed the test with the example data, but not the full dataset. Likely because I used a `set()` approach and the sum is actually of all values, including repeats, though that's not crystal clear in the problem statement.
