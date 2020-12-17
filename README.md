@@ -153,4 +153,4 @@ Speedup results
 |  10000 |  259.385   | 10.4211  |     23.8902  |
 | 100000 | 8677.73    | 96.2351  |     89.1722  |
 
-![](./tree/main/15/numpy_v_dict.png)
+![](./15/numpy_v_dict.png)
