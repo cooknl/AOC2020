@@ -153,8 +153,12 @@ Speedup results
 |  10000 |  259.385   | 10.4211  |     23.8902  |
 | 100000 | 8677.73    | 96.2351  |     89.1722  |
 
-![](./15/numpy_v_dict.png)
+![A plot comparing the time of each algo as epoch size increases](./15/numpy_v_dict.png)
 
 ## Day 16 (Python)
 
 - First attempt passed the test with the example data, but not the full dataset. Likely because I used a `set()` approach and the sum is actually of all values, including repeats, though that's not crystal clear in the problem statement.
+- Part a complete using a hybrid set/list approach:
+  - `included set` built from the rules for ticket fields, creating ranges of values then updating the set
+  - `nearby list` built from all the nearby tickets
+  - `not_included list` checking whether each value (including repeats) in the nearby list are not in the included set
