@@ -75,5 +75,5 @@ def answer(input_data=data):
     return {'a':answer_a, 'b':answer_b}
 
 if __name__ == "__main__":
-    # submit(answer(data)['a'], part='a')
-    # submit(answer(data)['b'], part='b')
+    submit(answer(data)['a'], part='a')
+    submit(answer(data)['b'], part='b')
