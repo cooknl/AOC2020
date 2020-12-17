@@ -162,3 +162,10 @@ Speedup results
   - `included set` built from the rules for ticket fields, creating ranges of values then updating the set
   - `nearby list` built from all the nearby tickets
   - `not_included list` checking whether each value (including repeats) in the nearby list are not in the included set
+- First attempt at part b also figured out the fields with the example data, but not the full dataset, because the full dataset has fields with more than one applicable rule!
+- The lack of complete examples to populate tests with was a downer.
+- This Day consists almost entirely of:
+
+>"Whew...figured that out...now what was the actual thing I'm trying to do??"
+
+- Had to do some `while` loop iteration to identify which of the fields were which, but then it worked!
