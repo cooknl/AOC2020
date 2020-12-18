@@ -169,3 +169,19 @@ Speedup results
 >"Whew...figured that out...now what was the actual thing I'm trying to do??"
 
 - Had to do some `while` loop iteration to identify which of the fields were which, but then it worked!
+
+## Day 17 (Python)
+
+- Another day another infinite grid, this time 3 dimensions (and **SPOILER** 4 dimensions for part b)
+- Biggest issue was trying to understand the example provided.
+  - Thanks to reddit for clarifying what "(and the frame of view follows the active cells in each cycle)" means
+  - <https://www.reddit.com/r/adventofcode/comments/ker0wi/2020_day_17_part_1_sample_input_wrong/>
+  - Once I figured out the coordinates, my test code could run
+- Fortunately, the examples and the actual data matched today (no big surprises)
+- I mis-identified the "twist" going from part a to part b.
+  - I anticipated that it was going to be the number of cycles, so I included it as in input argument
+  - Instead, it was the number of dimensions.
+- Fortunately, the tweaks to include the 4th dimension weren't too bad, and even helped me get more concise in a couple areas, but I wasn't able to cleanly integrate and refactor everything.
+- The unpack symbol `*` came in handy for simple range statements
+- I couldn't come up with anything more clever than "only keep the active states in a dictionary" as far as data structures went, but it served me well.
+- I'm sure there's a clean `itertools` way to generate the set of neighbors, but I couldn't figure it out
