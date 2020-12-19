@@ -185,3 +185,9 @@ Speedup results
 - The unpack symbol `*` came in handy for simple range statements
 - I couldn't come up with anything more clever than "only keep the active states in a dictionary" as far as data structures went, but it served me well.
 - I'm sure there's a clean `itertools` way to generate the set of neighbors, but I couldn't figure it out
+
+## Day 18 (Python)
+
+- Stacks, pointers, reverse polish notation, and op codes, oh my!
+- Part b was significantly different than a, so had to do a separate function.
+- Semi-recursive for the parentheses
