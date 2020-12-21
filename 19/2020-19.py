@@ -85,14 +85,15 @@ def test_rule_matches():
 
 
 def test_answer():
-    assert answer(test_data_a1)['a'] == 2
-    assert answer(test_data_a1)['a'] == 2
-    # assert answer(data)['a'] != 0
+    # assert answer(test_data_a1)['a'] == 2
+    # assert answer(test_data_a2)['a'] == 2
+    assert answer(data)['a'] != 0
     # assert answer(data)['b'] != 0
 
 #-----------BIZNESS
 
-### This hit the maximum recursion depth...
+
+### This hit the maximum recursion depth...PROBABLY BECAUSE OF THE MIS-PARSED MULTIPLE DIGIT NUMBERS
 # # Recursive parsing of a regex pattern
 # def parse_rules(rules, value):
 #     if isinstance(value, str): # If you've reached the 'a' or 'b' just return it (0-condition)
@@ -146,8 +147,8 @@ def build_pattern(rules, value):
     if isinstance(value, list):
         if isinstance(value[0], list):
             return [build_pattern(rules, v) for v in value]
-        else:
-            return [rules[v] for v in value]
+        # else:
+        #     return [rules[v] for v in value]
 
 def single_rule_match(rule, msg):
     return re.findall(f'({rule}){{1}}',msg)
@@ -167,12 +168,11 @@ def gen_input(input_data):
 
 def answer(input_data):
     inputs = gen_input(input_data)
+    print(inputs['rules'])
     #pattern = parse_rules(inputs['rules'],inputs['rules'][0])
-    raw_pattern = inputs['rules'][0]
-    print(raw_pattern)
-    while nums_in_this_list(raw_pattern):
-        print(raw_pattern)
-        raw_pattern = [build_pattern(inputs['rules'],e) for e in raw_pattern]
+    # raw_pattern = inputs['rules'][0]
+    # while nums_in_this_list(raw_pattern):
+    #     raw_pattern = [build_pattern(inputs['rules'],e) for e in raw_pattern]
     # pattern = render_pattern(raw_pattern)
     answer_a = []
     # for msg in inputs['msgs']:

@@ -193,7 +193,10 @@ Speedup results
 - Semi-recursive for the parentheses
 - `from numbers import Integral` and `if isinstance(var, Integral)` to check the "integer-ness" of an object
 
-## Day 19 (Python)
+## Day 19 (Python) "On Hold"
 
 - Use double braces `{{` `}}` to include curly braces, `{}`, in an f-string (that uses curly braces to insert python statements)
 - Once again the example/actual datasets are different in a crucial way. Examples are all single-digit numbers
+
+## Day 20 (Python)
+
